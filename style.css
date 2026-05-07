@@ -1,0 +1,17 @@
+body{
+
+    font-family: Arial;
+
+}
+
+.card{
+
+    border-radius: 20px;
+
+}
+
+button{
+
+    border-radius: 12px !important;
+
+}
