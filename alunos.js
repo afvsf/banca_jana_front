@@ -4,9 +4,25 @@ const API =
 
 async function carregarAlunos(){
 
-    const req = await fetch(
-        `${API}/alunos`
-    );
+   const req = await fetch(
+
+    `${API}/alunos`,
+
+    {
+
+        headers: {
+
+            'Content-Type':
+            'application/json',
+
+            'Authorization':
+            localStorage.getItem('token')
+
+        }
+
+    }
+
+);
 
     const alunos = await req.json();
 
