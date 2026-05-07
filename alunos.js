@@ -130,33 +130,55 @@ async function salvarAluno(){
 
     if(id){
 
-        await fetch(`${API}/alunos/${id}`, {
+    await fetch(
 
-            method: 'PUT',
+    `${API}/alunos/${id}`,
 
-            headers: {
-                'Content-Type':
-                'application/json'
-            },
+    {
 
-            body: JSON.stringify(dados)
+        method: 'PUT',
 
-        });
+        headers: {
+
+            'Content-Type':
+            'application/json',
+
+            'Authorization':
+            localStorage.getItem('token')
+
+        },
+
+        body: JSON.stringify(dados)
+
+    }
+
+);
 
     }else{
 
-        await fetch(`${API}/alunos`, {
+       await fetch(
 
-            method: 'POST',
+    `${API}/alunos`,
 
-            headers: {
-                'Content-Type':
-                'application/json'
-            },
+    {
 
-            body: JSON.stringify(dados)
+        method: 'POST',
 
-        });
+        headers: {
+
+            'Content-Type':
+            'application/json',
+
+            'Authorization':
+            localStorage.getItem('token')
+
+        },
+
+        body: JSON.stringify(dados)
+
+    }
+
+);
 
     }
 
@@ -212,11 +234,24 @@ async function excluirAluno(id){
 
     if(confirm('Excluir aluno?')){
 
-        await fetch(`${API}/alunos/${id}`, {
+        await fetch(
 
-            method: 'DELETE'
+    `${API}/alunos/${id}`,
 
-        });
+    {
+
+        method: 'DELETE',
+
+        headers: {
+
+            'Authorization':
+            localStorage.getItem('token')
+
+        }
+
+    }
+
+);
 
         carregarAlunos();
 
