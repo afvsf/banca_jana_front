@@ -9,10 +9,25 @@ async function carregarMensalidades(){
             'filtroStatus'
         ).value;
 
-    const req =
-        await fetch(
-            `${API}/mensalidades`
-        );
+  const req = await fetch(
+
+    `${API}/mensalidades`,
+
+    {
+
+        headers: {
+
+            'Content-Type':
+            'application/json',
+
+            'Authorization':
+            localStorage.getItem('token')
+
+        }
+
+    }
+
+);
 
     let mensalidades =
         await req.json();
@@ -173,24 +188,29 @@ async function pagarMensalidade(){
 
     };
 
-    await fetch(
+await fetch(
 
-        `${API}/mensalidades/pagar/${id}`,
+    `${API}/mensalidades/pagar/${id}`,
 
-        {
+    {
 
-            method: 'PUT',
+        method: 'PUT',
 
-            headers: {
-                'Content-Type':
-                'application/json'
-            },
+        headers: {
 
-            body: JSON.stringify(dados)
+            'Content-Type':
+            'application/json',
 
-        }
+            'Authorization':
+            localStorage.getItem('token')
 
-    );
+        },
+
+        body: JSON.stringify(dados)
+
+    }
+
+);
 
     location.reload();
 
