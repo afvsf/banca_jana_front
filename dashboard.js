@@ -4,9 +4,25 @@ const API =
 
 async function carregarDashboard(){
 
-    const req = await fetch(
-        `${API}/dashboard`
-    );
+  const req = await fetch(
+
+    `${API}/dashboard`,
+
+    {
+
+        headers: {
+
+            'Content-Type':
+            'application/json',
+
+            'Authorization':
+            localStorage.getItem('token')
+
+        }
+
+    }
+
+);
 
     const dados = await req.json();
 
