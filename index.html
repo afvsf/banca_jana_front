@@ -64,7 +64,57 @@ rel="stylesheet">
 
 async function login(){
 
-    window.location = 'dashboard.html';
+    const email =
+        document.getElementById(
+            'email'
+        ).value;
+
+    const senha =
+        document.getElementById(
+            'senha'
+        ).value;
+
+    const req =
+        await fetch(
+
+            `${API}/auth/login`,
+
+            {
+
+                method: 'POST',
+
+                headers: {
+                    'Content-Type':
+                    'application/json'
+                },
+
+                body: JSON.stringify({
+                    email,
+                    senha
+                })
+
+            }
+
+        );
+
+    const dados =
+        await req.json();
+
+    if(dados.token){
+
+        localStorage.setItem(
+            'token',
+            dados.token
+        );
+
+        window.location =
+            'dashboard.html';
+
+    }else{
+
+        alert('Login inválido');
+
+    }
 
 }
 
