@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Mensalidades</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container py-3">
+
+    <div class="d-flex
+                justify-content-between
+                align-items-center
+                mb-3">
+
+        <h3>Mensalidades</h3>
+
+    </div>
+
+
+    <select
+        id="filtroStatus"
+        class="form-select mb-3"
+        onchange="carregarMensalidades()">
+
+        <option value="">
+            Todos
+        </option>
+
+        <option value="PAGO">
+            Pago
+        </option>
+
+        <option value="PENDENTE">
+            Pendente
+        </option>
+
+    </select>
+
+
+    <div id="listaMensalidades"></div>
+
+</div>
+
+
+<!-- MODAL PAGAMENTO -->
+
+<div
+class="modal fade"
+id="modalPagamento">
+
+<div class="modal-dialog">
+
+<div class="modal-content border-0 rounded-4">
+
+<div class="modal-header">
+
+<h5>Registrar Pagamento</h5>
+
+<button
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<input
+type="hidden"
+id="mensalidade_id">
+
+
+<label>Forma Pagamento</label>
+
+<select
+id="forma_pagamento"
+class="form-select mb-3">
+
+<option>PIX</option>
+<option>DINHEIRO</option>
+<option>CARTÃO</option>
+
+</select>
+
+
+<label>Valor Pago</label>
+
+<input
+type="number"
+id="valor_pago"
+class="form-control">
+
+</div>
+
+<div class="modal-footer">
+
+<button
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Cancelar
+
+</button>
+
+<button
+class="btn btn-success"
+onclick="pagarMensalidade()">
+
+Confirmar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src=
+"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script src="js/mensalidades.js"></script>
+
+</body>
+</html>
