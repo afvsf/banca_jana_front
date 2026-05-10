@@ -1,5 +1,5 @@
 const API =
-'https://bancajana-production.up.railway.app/;
+'https://bancajana-production.up.railway.app';
 
 
 async function carregarDashboard(){
