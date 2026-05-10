@@ -86,6 +86,8 @@ async function carregarAlunos(){
                     ${aluno.dia_vencimento}
                 </small>
 
+                 <br>
+
                 <div class="mt-3">
 
                     <button
