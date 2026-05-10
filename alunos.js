@@ -83,7 +83,7 @@ async function carregarAlunos(){
 
                  <small>
                     Vencimento da Mensalidade:
-                    ${aluno.dia_vencimento}
+                    Dia ${aluno.dia_vencimento}
                 </small>
 
                  <br>
