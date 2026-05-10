@@ -152,6 +152,35 @@ function abrirModal(id, valor){
 
 }
 
+async function gerarMensalidades(){
+
+    await fetch(
+
+        `${API}/mensalidades/gerar-anual`,
+
+        {
+
+            method: 'POST',
+
+            headers: {
+
+                'Authorization':
+                localStorage.getItem('token')
+
+            }
+
+        }
+
+    );
+
+    alert(
+        'Mensalidades geradas'
+    );
+
+    carregarMensalidades();
+
+}
+
 
 async function pagarMensalidade(){
 
