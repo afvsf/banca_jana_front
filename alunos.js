@@ -1,6 +1,24 @@
 const API =
 'https://bancajana-production.up.railway.app';
 
+function formatarDataBR(data){
+
+    if(!data) return '';
+
+    return new Date(data)
+    .toLocaleDateString('pt-BR');
+
+}
+
+
+function formatarDataInput(data){
+
+    if(!data) return '';
+
+    return data.split('T')[0];
+
+}
+
 
 async function carregarAlunos(){
 
@@ -202,9 +220,11 @@ async function editarAluno(id){
         aluno.nome;
 
     document.getElementById(
-        'data_matricula'
-    ).value =
-        aluno.data_matricula;
+    'data_matricula'
+).value =
+formatarDataInput(
+    aluno.data_matricula
+);
 
     document.getElementById(
         'responsavel'
