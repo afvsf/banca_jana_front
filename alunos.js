@@ -79,6 +79,11 @@ async function carregarAlunos(){
                     R$ ${aluno.valor_mensalidade}
                 </small>
 
+                 <small>
+                    Vencimento da Mensalidade:
+                    ${aluno.vencimento_mensalidade}
+                </small>
+
                 <div class="mt-3">
 
                     <button
