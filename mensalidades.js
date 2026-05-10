@@ -53,7 +53,7 @@ async function carregarMensalidades(){
 
                 <div class="card-body">
 
-                    <h5>${item.nome}</h5>
+                    <h5>${item.aluno}</h5>
 
                     <p class="mb-1">
 
