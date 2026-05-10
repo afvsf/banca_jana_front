@@ -61,6 +61,9 @@ rel="stylesheet">
 </div>
 
 <script>
+const API =
+'https://bancajana-production.up.railway.app/;
+
 
 async function login(){
 
@@ -84,8 +87,10 @@ async function login(){
                 method: 'POST',
 
                 headers: {
+
                     'Content-Type':
                     'application/json'
+
                 },
 
                 body: JSON.stringify({
@@ -112,7 +117,9 @@ async function login(){
 
     }else{
 
-        alert('Login inválido');
+        alert(
+            'Login inválido'
+        );
 
     }
 
