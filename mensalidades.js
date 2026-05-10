@@ -1,5 +1,5 @@
 const API =
-'https://SEU-BACKEND.up.railway.app';
+'https://bancajana-production.up.railway.app/;
 
 
 async function carregarMensalidades(){
