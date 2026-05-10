@@ -1,6 +1,9 @@
 const API =
 'https://bancajana-production.up.railway.app';
 
+const token =
+localStorage.getItem('token');
+
 
 async function carregarMensalidades(){
 
@@ -9,133 +12,111 @@ async function carregarMensalidades(){
             'filtroStatus'
         ).value;
 
-  const req = await fetch(
+    const req =
+        await fetch(
 
-    `${API}/mensalidades`,
+            `${API}/mensalidades`,
 
-    {
+            {
 
-        headers: {
+                headers: {
 
-            'Content-Type':
-            'application/json',
+                    'Authorization':
+                    token
 
-            'Authorization':
-            localStorage.getItem('token')
+                }
 
-        }
+            }
 
-    }
+        );
 
-);
-
-    let mensalidades =
+    const dados =
         await req.json();
-
-    if(status){
-
-        mensalidades =
-            mensalidades.filter(m =>
-                m.status === status
-            );
-
-    }
 
     let html = '';
 
-    mensalidades.forEach(item => {
+    dados
+    .filter(item => {
 
-        let cor = 'secondary';
+        if(!status) return true;
 
-        if(item.status === 'PAGO'){
+        return item.status === status;
 
-            cor = 'success';
+    })
 
-        }
-
-        if(item.status === 'PENDENTE'){
-
-            cor = 'danger';
-
-        }
+    .forEach(item => {
 
         html += `
 
-        <div class="card
-                    border-0
-                    shadow-sm
-                    rounded-4
-                    mb-3">
+            <div
+            class="card border-0 shadow-sm mb-3 rounded-4">
 
-            <div class="card-body">
+                <div class="card-body">
 
-                <div class="
-                    d-flex
-                    justify-content-between">
+                    <h5>${item.nome}</h5>
 
-                    <h5>${item.aluno}</h5>
+                    <p class="mb-1">
 
-                    <span
-                    class="badge bg-${cor}">
+                        Referência:
+                        ${item.referencia_mes}/${item.referencia_ano}
 
-                    ${item.status}
+                    </p>
 
-                    </span>
+                    <p class="mb-1">
 
-                </div>
+                        Valor:
+                        R$ ${item.valor}
 
-                <small>
+                    </p>
 
-                    Referência:
-                    ${item.referencia_mes}/
-                    ${item.referencia_ano}
+                    <p class="mb-2">
 
-                </small>
+                        Status:
+                        <strong>${item.status}</strong>
 
-                <br>
-
-                <small>
-
-                    Valor:
-                    R$ ${item.valor}
-
-                </small>
-
-                <br>
-
-                <small>
-
-                    Vencimento:
-                    ${item.data_vencimento}
-
-                </small>
-
-                <div class="mt-3">
+                    </p>
 
                     ${
+
                         item.status !== 'PAGO'
 
                         ?
 
-                        `<button
-                            class="btn btn-success btn-sm"
-                            onclick="abrirPagamento(${item.id}, ${item.valor})">
+                        `
 
-                            Pagar
+                        <button
+                        class="btn btn-success"
 
-                        </button>`
+                        onclick="
+                        abrirModal(
+                            ${item.id},
+                            ${item.valor}
+                        )">
+
+                        Registrar Pagamento
+
+                        </button>
+
+                        `
 
                         :
 
-                        ''
+                        `
+
+                        <span
+                        class="badge bg-success">
+
+                        Pago
+
+                        </span>
+
+                        `
 
                     }
 
                 </div>
 
             </div>
-
-        </div>
 
         `;
 
@@ -148,7 +129,7 @@ async function carregarMensalidades(){
 }
 
 
-function abrirPagamento(id, valor){
+function abrirModal(id, valor){
 
     document.getElementById(
         'mensalidade_id'
@@ -158,11 +139,16 @@ function abrirPagamento(id, valor){
         'valor_pago'
     ).value = valor;
 
-    new bootstrap.Modal(
-        document.getElementById(
-            'modalPagamento'
-        )
-    ).show();
+    const modal =
+        new bootstrap.Modal(
+
+            document.getElementById(
+                'modalPagamento'
+            )
+
+        );
+
+    modal.show();
 
 }
 
@@ -174,46 +160,52 @@ async function pagarMensalidade(){
             'mensalidade_id'
         ).value;
 
-    const dados = {
+    const forma_pagamento =
+        document.getElementById(
+            'forma_pagamento'
+        ).value;
 
-        forma_pagamento:
-            document.getElementById(
-                'forma_pagamento'
-            ).value,
+    const valor_pago =
+        document.getElementById(
+            'valor_pago'
+        ).value;
 
-        valor_pago:
-            document.getElementById(
-                'valor_pago'
-            ).value
+    await fetch(
 
-    };
+        `${API}/mensalidades/pagar/${id}`,
 
-await fetch(
+        {
 
-    `${API}/mensalidades/pagar/${id}`,
+            method: 'PUT',
 
-    {
+            headers: {
 
-        method: 'PUT',
+                'Content-Type':
+                'application/json',
 
-        headers: {
+                'Authorization':
+                token
 
-            'Content-Type':
-            'application/json',
+            },
 
-            'Authorization':
-            localStorage.getItem('token')
+            body: JSON.stringify({
 
-        },
+                valor_pago,
+                forma_pagamento
 
-        body: JSON.stringify(dados)
+            })
 
-    }
+        }
 
-);
+    );
+
+    alert(
+        'Pagamento registrado'
+    );
 
     location.reload();
 
 }
+
 
 carregarMensalidades();
