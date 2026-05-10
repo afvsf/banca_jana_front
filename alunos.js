@@ -79,6 +79,8 @@ async function carregarAlunos(){
                     R$ ${aluno.valor_mensalidade}
                 </small>
 
+                 <br>
+
                  <small>
                     Vencimento da Mensalidade:
                     ${aluno.dia_vencimento}
