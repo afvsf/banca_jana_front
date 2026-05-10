@@ -142,6 +142,11 @@ async function salvarAluno(){
         valor_mensalidade:
             document.getElementById(
                 'valor_mensalidade'
+            ).value,
+
+         dia_vencimento:
+            document.getElementById(
+                'dia_vencimento'
             ).value
 
     };
