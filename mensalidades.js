@@ -4,6 +4,115 @@ const API =
 const token =
 localStorage.getItem('token');
 
+// ======================================
+// RENDER MENSALIDADES
+// ======================================
+
+
+function renderMensalidades(dados){
+
+    let html = '';
+
+    let totalPago = 0;
+
+    let totalPendente = 0;
+
+    dados.forEach(item => {
+
+        if(item.status === 'PAGO'){
+
+            totalPago +=
+                Number(item.valor);
+
+        }else{
+
+            totalPendente +=
+                Number(item.valor);
+
+        }
+
+        let atraso = '';
+
+        if(item.dias_atraso > 0){
+
+            atraso = `
+
+                <small class="text-danger">
+
+                    ${item.dias_atraso}
+                    dias atraso
+
+                </small>
+
+            `;
+
+        }
+
+        html += `
+
+        <div
+        class="card border-0 shadow-sm mb-3 rounded-4">
+
+            <div class="card-body">
+
+                <h5>${item.aluno}</h5>
+
+                <p>
+
+                    ${item.referencia_mes}/
+                    ${item.referencia_ano}
+
+                </p>
+
+                <p>
+
+                    R$ ${item.valor}
+
+                </p>
+
+                <p>
+
+                    ${item.status}
+
+                </p>
+
+                ${atraso}
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    html = `
+
+        <div
+        class="alert alert-success">
+
+            Total Recebido:
+            R$ ${totalPago.toFixed(2)}
+
+            <br>
+
+            Total Pendente:
+            R$ ${totalPendente.toFixed(2)}
+
+        </div>
+
+    ` + html;
+
+    document.getElementById(
+        'listaMensalidades'
+    ).innerHTML = html;
+
+}
+
+// ======================================
+// CARREGAR MENSALIDADES
+// ======================================
+
 
 async function carregarMensalidades(){
 
@@ -147,9 +256,7 @@ async function carregarMensalidades(){
 
 });
 
-    document.getElementById(
-        'listaMensalidades'
-    ).innerHTML = html;
+   renderMensalidades(dados);
 
 }
 
@@ -203,6 +310,48 @@ async function gerarMensalidades(){
     );
 
     carregarMensalidades();
+
+}
+
+async function buscarRelatorio(){
+
+    const inicio =
+        document.getElementById(
+            'data_inicio'
+        ).value;
+
+    const fim =
+        document.getElementById(
+            'data_fim'
+        ).value;
+
+    const status =
+        document.getElementById(
+            'filtroStatus'
+        ).value;
+
+    const req =
+        await fetch(
+
+            `${API}/mensalidades/relatorio/periodo?inicio=${inicio}&fim=${fim}&status=${status}`,
+
+            {
+
+                headers: {
+
+                    'Authorization':
+                    token
+
+                }
+
+            }
+
+        );
+
+    const dados =
+        await req.json();
+
+    renderMensalidades(dados);
 
 }
 
