@@ -44,37 +44,60 @@ async function carregarMensalidades(){
 
     })
 
-    .forEach(item => {
+.forEach(item => {
 
-        html += `
+    let atraso = '';
 
-            <div
-            class="card border-0 shadow-sm mb-3 rounded-4">
+    if(item.dias_atraso > 0){
 
-                <div class="card-body">
+        atraso = `
 
-                    <h5>${item.aluno}</h5>
+            <br>
 
-                    <p class="mb-1">
+            <small class="text-danger">
 
-                        Referência:
-                        ${item.referencia_mes}/${item.referencia_ano}
+                ${item.dias_atraso}
+                dias atraso
 
-                    </p>
+            </small>
 
-                    <p class="mb-1">
+        `;
 
-                        Valor:
-                        R$ ${item.valor}
+    }
 
-                    </p>
+    html += `
 
-                    <p class="mb-2">
+        <div
+        class="card border-0 shadow-sm mb-3 rounded-4">
 
-                        Status:
-                        <strong>${item.status}</strong>
+            <div class="card-body">
 
-                    </p>
+                <h5>${item.aluno}</h5>
+
+                <p class="mb-1">
+
+                    Referência:
+                    ${item.referencia_mes}/${item.referencia_ano}
+
+                </p>
+
+                <p class="mb-1">
+
+                    Valor:
+                    R$ ${item.valor}
+
+                </p>
+
+                <p class="mb-1">
+
+                    Status:
+                    <strong>${item.status}</strong>
+
+                </p>
+
+                ${atraso}
+
+                <div class="mt-3">
 
                     ${
 
@@ -111,24 +134,6 @@ async function carregarMensalidades(){
                         </span>
 
                         `
-                        let atraso = '';
-
-                        if(item.dias_atraso > 0){
-
-                        atraso = `
-
-                        <br>
-
-                        <small class="text-danger">
-
-                        ${item.dias_atraso}
-                        dias atraso
-
-                        </small>
-
-                        `;
-
-                        }
 
                     }
 
@@ -136,9 +141,11 @@ async function carregarMensalidades(){
 
             </div>
 
-        `;
+        </div>
 
-    });
+    `;
+
+});
 
     document.getElementById(
         'listaMensalidades'
