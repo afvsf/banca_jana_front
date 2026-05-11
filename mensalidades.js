@@ -47,7 +47,7 @@ function renderMensalidades(dados){
             `;
 
         }
-
+        console.log(item);
       html += `
 
 <div
