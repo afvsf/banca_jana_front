@@ -20,65 +20,134 @@ rel="stylesheet">
 <body class="bg-light">
 
 
-<div class="container py-3">
+ <div class="container py-4">
 
-    <h3 class="mb-4">
+       <h3 class="mb-4">
         Dashboard Financeiro
     </h3>
 
-    <div class="row">
+    <div class="row mb-4">
 
-        <div class="col-6 mb-3">
+        <div class="col-md-3">
 
-            <div class="card border-0 shadow rounded-4 p-3">
+            <label>Mês</label>
 
-                <small>Total Recebido</small>
+            <select
+                id="mes"
+                class="form-select">
 
-                <h4 id="recebido">
-                    R$ 0,00
-                </h4>
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Ano</label>
+
+            <input
+                type="number"
+                id="ano"
+                class="form-control"
+                value="2026">
+
+        </div>
+
+        <div class="col-md-3 d-flex align-items-end">
+
+            <button
+                class="btn btn-primary w-100"
+                onclick="carregarDashboard()">
+
+                Buscar
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="row g-3">
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 rounded-4">
+
+                <div class="card-body">
+
+                    <h6>Total Recebido</h6>
+
+                    <h3 id="totalRecebido">
+                        R$ 0,00
+                    </h3>
+
+                </div>
 
             </div>
 
         </div>
 
-        <div class="col-6 mb-3">
+        <div class="col-md-3">
 
-            <div class="card border-0 shadow rounded-4 p-3">
+            <div class="card shadow-sm border-0 rounded-4">
 
-                <small>Pendente</small>
+                <div class="card-body">
 
-                <h4 id="pendente">
-                    R$ 0,00
-                </h4>
+                    <h6>Total Pendente</h6>
 
-            </div>
+                    <h3 id="totalPendente">
+                        R$ 0,00
+                    </h3>
 
-        </div>
-
-        <div class="col-6 mb-3">
-
-            <div class="card border-0 shadow rounded-4 p-3">
-
-                <small>Alunos</small>
-
-                <h4 id="alunos">
-                    0
-                </h4>
+                </div>
 
             </div>
 
         </div>
 
-        <div class="col-6 mb-3">
+        <div class="col-md-3">
 
-            <div class="card border-0 shadow rounded-4 p-3">
+            <div class="card shadow-sm border-0 rounded-4">
 
-                <small>Devedores</small>
+                <div class="card-body">
 
-                <h4 id="inadimplentes">
-                    0
-                </h4>
+                    <h6>Inadimplentes</h6>
+
+                    <h3 id="inadimplentes">
+                        0
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 rounded-4">
+
+                <div class="card-body">
+
+                    <h6>Pagamentos</h6>
+
+                    <h3 id="pagamentos">
+                        0
+                    </h3>
+
+                </div>
 
             </div>
 
@@ -86,18 +155,19 @@ rel="stylesheet">
 
     </div>
 
-    <div class="card border-0 shadow rounded-4 p-3">
+    <div class="card border-0 shadow-sm rounded-4 mt-4">
 
-        <h5 class="mb-3">
-            Últimos Pagamentos
-        </h5>
+        <div class="card-body">
 
-        <div id="ultimosPagamentos"></div>
+            <h5>Resumo do Mês</h5>
+
+            <div id="listaResumo"></div>
+
+        </div>
 
     </div>
 
 </div>
-
 
 <script src="./dashboard.js"></script>
 
