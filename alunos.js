@@ -106,6 +106,14 @@ async function carregarAlunos(){
 
                     </button>
 
+                    <button
+                        class="btn btn-dark btn-sm"
+                        onclick="renovarAluno(${item.id})">
+
+                        Renovar
+
+                    </button>
+
                 </div>
 
             </div>
@@ -288,6 +296,57 @@ async function excluirAluno(id){
 );
 
         carregarAlunos();
+
+    }
+
+}
+
+async function renovarAluno(id){
+
+    if(
+        !confirm(
+            'Gerar mensalidades do próximo ano?'
+        )
+    ){
+        return;
+    }
+
+    try{
+
+        const req =
+            await fetch(
+
+                `${API}/mensalidades/renovar-aluno/${id}`,
+
+                {
+
+                    method: 'POST',
+
+                    headers: {
+
+                        'Authorization':
+                        localStorage.getItem('token')
+
+                    }
+
+                }
+
+            );
+
+        const dados =
+            await req.json();
+
+        alert(
+            dados.mensagem
+        );
+
+    }catch(error){
+
+        console.log(error);
+
+        alert(
+            'Erro ao renovar aluno'
+        );
 
     }
 
