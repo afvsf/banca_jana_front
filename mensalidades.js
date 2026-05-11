@@ -48,41 +48,83 @@ function renderMensalidades(dados){
 
         }
 
-        html += `
+      html += `
 
-        <div
-        class="card border-0 shadow-sm mb-3 rounded-4">
+<div
+class="card border-0 shadow-sm mb-3 rounded-4">
 
-            <div class="card-body">
+    <div class="card-body">
 
-                <h5>${item.aluno}</h5>
+        <h5>${item.aluno}</h5>
 
-                <p>
+        <p>
 
-                    ${item.referencia_mes}/
-                    ${item.referencia_ano}
+            ${item.referencia_mes}/
+            ${item.referencia_ano}
 
-                </p>
+        </p>
 
-                <p>
+        <p>
 
-                    R$ ${item.valor}
+            R$ ${item.valor}
 
-                </p>
+        </p>
 
-                <p>
+        <p>
 
-                    ${item.status}
+            ${item.status}
 
-                </p>
+        </p>
 
-                ${atraso}
+        ${atraso}
 
-            </div>
+        <div class="mt-3">
+
+            ${
+
+                item.status !== 'PAGO'
+
+                ?
+
+                `
+
+                <button
+                class="btn btn-success btn-sm"
+
+                onclick="
+                abrirModal(
+                    ${item.id},
+                    ${item.valor}
+                )">
+
+                Registrar Pagamento
+
+                </button>
+
+                `
+
+                :
+
+                `
+
+                <span
+                class="badge bg-success">
+
+                Pago
+
+                </span>
+
+                `
+
+            }
 
         </div>
 
-        `;
+    </div>
+
+</div>
+
+`;
 
     });
 
