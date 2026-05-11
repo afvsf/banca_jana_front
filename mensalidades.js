@@ -319,6 +319,12 @@ async function pagarMensalidade(){
             'valor_pago'
         ).value;
 
+    // DATA PAGAMENTO
+    const data_pagamento =
+        document.getElementById(
+            'data_pagamento'
+        ).value;
+
     await fetch(
 
         `${API}/mensalidades/pagar/${id}`,
@@ -340,7 +346,8 @@ async function pagarMensalidade(){
             body: JSON.stringify({
 
                 valor_pago,
-                forma_pagamento
+                forma_pagamento,
+                data_pagamento
 
             })
 
