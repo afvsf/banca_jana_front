@@ -66,7 +66,16 @@ class="card border-0 shadow-sm mb-3 rounded-4">
 
         <p>
 
+            Valor:
             R$ ${item.valor}
+
+        </p>
+
+        <p>
+
+            Vencimento:
+            ${new Date(item.data_vencimento)
+            .toLocaleDateString('pt-BR')}
 
         </p>
 
