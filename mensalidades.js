@@ -74,12 +74,7 @@ class="card border-0 shadow-sm mb-3 rounded-4">
         <p>
 
             Vencimento:
-
-            ${item.data_vencimento
-            .split('T')[0]
-            .split('-')
-            .reverse()
-            .join('/')}
+            ${item.data_vencimento}
 
         </p>
 
