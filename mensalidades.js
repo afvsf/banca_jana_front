@@ -184,121 +184,17 @@ async function carregarMensalidades(){
     const dados =
         await req.json();
 
-    let html = '';
+    renderMensalidades(
 
-    dados
-    .filter(item => {
+        dados.filter(item => {
 
-        if(!status) return true;
+            if(!status) return true;
 
-        return item.status === status;
+            return item.status === status;
 
-    })
+        })
 
-.forEach(item => {
-
-    let atraso = '';
-
-    if(item.dias_atraso > 0){
-
-        atraso = `
-
-            <br>
-
-            <small class="text-danger">
-
-                ${item.dias_atraso}
-                dias atraso
-
-            </small>
-
-        `;
-
-    }
-
-    html += `
-
-        <div
-        class="card border-0 shadow-sm mb-3 rounded-4">
-
-            <div class="card-body">
-
-                <h5>${item.aluno}</h5>
-
-                <p class="mb-1">
-
-                    Referência:
-                    ${item.referencia_mes}/${item.referencia_ano}
-
-                </p>
-
-                <p class="mb-1">
-
-                    Valor:
-                    R$ ${item.valor}
-
-                </p>
-
-                <p class="mb-1">
-
-                    Status:
-                    <strong>${item.status}</strong>
-
-                </p>
-
-                ${atraso}
-
-                <div class="mt-3">
-
-                    ${
-
-                        item.status !== 'PAGO'
-
-                        ?
-
-                        `
-
-                        <button
-                        class="btn btn-success"
-
-                        onclick="
-                        abrirModal(
-                            ${item.id},
-                            ${item.valor}
-                        )">
-
-                        Registrar Pagamento
-
-                        </button>
-
-                        `
-
-                        :
-
-                        `
-
-                        <span
-                        class="badge bg-success">
-
-                        Pago
-
-                        </span>
-
-                        `
-
-                    }
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-});
-
-   renderMensalidades(dados);
+    );
 
 }
 
