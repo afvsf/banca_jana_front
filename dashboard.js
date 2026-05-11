@@ -1,71 +1,120 @@
 const API =
 'https://bancajana-production.up.railway.app';
 
+const token =
+localStorage.getItem('token');
 
 async function carregarDashboard(){
 
-  const req = await fetch(
+    const mes =
+        document.getElementById('mes').value;
 
-    `${API}/dashboard`,
+    const ano =
+        document.getElementById('ano').value;
 
-    {
+    const req =
+        await fetch(
 
-        headers: {
+            `${API}/mensalidades`,
 
-            'Content-Type':
-            'application/json',
+            {
 
-            'Authorization':
-            localStorage.getItem('token')
+                headers: {
 
-        }
+                    'Authorization':
+                    token
 
-    }
+                }
 
-);
+            }
 
-    const dados = await req.json();
+        );
 
-    document.getElementById(
-        'recebido'
-    ).innerHTML =
-        `R$ ${dados.total_recebido}`;
+    const dados =
+        await req.json();
 
-    document.getElementById(
-        'pendente'
-    ).innerHTML =
-        `R$ ${dados.total_pendente}`;
+    const filtrado =
+        dados.filter(item =>
 
-    document.getElementById(
-        'alunos'
-    ).innerHTML =
-        dados.total_alunos;
+            item.referencia_mes == mes
+            &&
 
-    document.getElementById(
-        'inadimplentes'
-    ).innerHTML =
-        dados.inadimplentes;
+            item.referencia_ano == ano
+
+        );
+
+    let totalRecebido = 0;
+
+    let totalPendente = 0;
+
+    let inadimplentes = 0;
+
+    let pagamentos = 0;
 
     let html = '';
 
-    dados.ultimos_pagamentos.forEach(item => {
+    filtrado.forEach(item => {
+
+        if(item.status === 'PAGO'){
+
+            totalRecebido +=
+                Number(item.valor_pago || 0);
+
+            pagamentos++;
+
+        }else{
+
+            totalPendente +=
+                Number(item.valor);
+
+            inadimplentes++;
+
+        }
 
         html += `
+
             <div class="border-bottom py-2">
 
-                <strong>${item.nome}</strong>
+                <strong>${item.aluno}</strong>
 
                 <br>
 
-                R$ ${item.valor_pago}
+                Status:
+                ${item.status}
+
+                <br>
+
+                Valor:
+                R$ ${item.valor}
 
             </div>
+
         `;
 
     });
 
     document.getElementById(
-        'ultimosPagamentos'
+        'totalRecebido'
+    ).innerHTML =
+
+        `R$ ${totalRecebido.toFixed(2)}`;
+
+    document.getElementById(
+        'totalPendente'
+    ).innerHTML =
+
+        `R$ ${totalPendente.toFixed(2)}`;
+
+    document.getElementById(
+        'inadimplentes'
+    ).innerHTML = inadimplentes;
+
+    document.getElementById(
+        'pagamentos'
+    ).innerHTML = pagamentos;
+
+    document.getElementById(
+        'listaResumo'
     ).innerHTML = html;
 
 }
