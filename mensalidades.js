@@ -111,6 +111,24 @@ async function carregarMensalidades(){
                         </span>
 
                         `
+                        let atraso = '';
+
+                        if(item.dias_atraso > 0){
+
+                        atraso = `
+
+                        <br>
+
+                        <small class="text-danger">
+
+                        ${item.dias_atraso}
+                        dias atraso
+
+                        </small>
+
+                        `;
+
+                        }
 
                     }
 
