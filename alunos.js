@@ -106,9 +106,9 @@ async function carregarAlunos(){
 
                     </button>
 
-                    <button
+                   <button
                         class="btn btn-dark btn-sm"
-                        onclick="renovarAluno(${item.id})">
+                        onclick="renovarAluno(${aluno.id})">
 
                         Renovar
 
@@ -229,9 +229,22 @@ async function salvarAluno(){
 
 async function editarAluno(id){
 
-    const req =
-        await fetch(`${API}/alunos/${id}`);
+    const req = await fetch(
 
+    `${API}/alunos/${id}`,
+
+    {
+
+        headers: {
+
+            'Authorization':
+            localStorage.getItem('token')
+
+        }
+
+    }
+
+);
     const aluno =
         await req.json();
 
@@ -262,6 +275,10 @@ formatarDataInput(
         'valor_mensalidade'
     ).value =
         aluno.valor_mensalidade;
+    document.getElementById(
+        'dia_vencimento'
+    ).value =
+    aluno.dia_vencimento;
 
     new bootstrap.Modal(
         document.getElementById(
