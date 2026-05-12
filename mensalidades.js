@@ -9,8 +9,12 @@ function formatarData(data){
 
     if(!data) return '';
 
+    // força string
+    data = String(data);
+
+    // pega somente data
     const somenteData =
-        data.split('T')[0];
+        data.substring(0,10);
 
     const partes =
         somenteData.split('-');
