@@ -9,10 +9,16 @@ function formatarData(data){
 
     if(!data) return '';
 
-    // força string
     data = String(data);
 
-    // pega somente data
+    // já está BR
+    if(data.includes('/')){
+
+        return data;
+
+    }
+
+    // formato ISO
     const somenteData =
         data.substring(0,10);
 
