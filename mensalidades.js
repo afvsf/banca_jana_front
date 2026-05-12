@@ -86,10 +86,13 @@ class="card border-0 shadow-sm mb-3 rounded-4">
 
         </p>
 
-        <p>
+      <p>
 
             Vencimento:
-            ${item.data_vencimento}
+
+            ${formatarData(
+            item.data_vencimento
+            )}
 
         </p>
 
