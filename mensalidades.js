@@ -4,6 +4,21 @@ const API =
 const token =
 localStorage.getItem('token');
 
+
+function formatarData(data){
+
+    if(!data) return '';
+
+    const somenteData =
+        data.split('T')[0];
+
+    const partes =
+        somenteData.split('-');
+
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+
+}
+
 // ======================================
 // RENDER MENSALIDADES
 // ======================================
