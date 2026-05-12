@@ -11,7 +11,7 @@ function criarMenu(){
             class="navbar-brand fw-bold"
             href="#">
 
-            Sistema Banca
+            Sistema Mensalidade Reforço
 
             </a>
 
