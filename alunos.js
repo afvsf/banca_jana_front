@@ -7,7 +7,6 @@ function formatarDataBR(data){
 
     return new Date(data)
     .toLocaleDateString('pt-BR');
-
 }
 
 function formatarDataInput(data){
