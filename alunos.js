@@ -36,6 +36,20 @@ async function carregarTurmas(){
 
     console.log("TURMAS:", turmas);
 
+    let html = '<option value="">Selecione a turma</option>';
+
+    turmas.forEach(turma => {
+
+        html += `
+            <option value="${turma.id}">
+                ${turma.nome}
+            </option>
+        `;
+
+    });
+
+    document.getElementById("turma_id").innerHTML = html;
+
 }
 
 async function carregarAlunos(){
@@ -432,5 +446,4 @@ function buscarAluno(){
 }
 
 carregarTurmas();
-
 carregarAlunos();
