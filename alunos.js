@@ -61,6 +61,15 @@ async function carregarAlunos(){
                 <h5>${aluno.nome}</h5>
 
                 <small>
+
+                    Turma:
+                    ${aluno.turma ?? '-'}
+
+                </small>
+
+                <br>
+
+                <small>
                     Responsável:
                     ${aluno.responsavel}
                 </small>
