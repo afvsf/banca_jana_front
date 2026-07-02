@@ -29,20 +29,21 @@ async function carregarTurmas(){
 
     const turmas = await req.json();
 
+    // 👇 DEBUG AQUI (é aqui que você coloca)
+    console.log(document.getElementById("turma_id"));
+    console.log("TURMAS:", turmas);
+
     let html = '<option value="">Selecione a turma</option>';
 
     turmas.forEach(turma => {
-
         html += `
             <option value="${turma.id}">
                 ${turma.nome}
             </option>
         `;
-
     });
 
     document.getElementById("turma_id").innerHTML = html;
-
 }
 
 async function carregarAlunos(){
