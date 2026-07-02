@@ -20,34 +20,21 @@ function formatarDataInput(data){
 
 async function carregarTurmas(){
 
-    console.log("Carregando turmas...");
+    const token = localStorage.getItem("token");
 
-    const req = await fetch(
-        `${API}/turmas`,
-        {
-            headers:{
-                Authorization: localStorage.getItem("token")
-            }
+    console.log("TOKEN:", token);
+
+    const req = await fetch(`${API}/turmas`, {
+        headers: {
+            Authorization: token
         }
-    );
+    });
+
+    console.log("STATUS:", req.status);
 
     const turmas = await req.json();
 
-    console.log(turmas);
-
-    let html = "";
-
-    turmas.forEach(turma=>{
-
-        html += `
-            <option value="${turma.id}">
-                ${turma.nome}
-            </option>
-        `;
-
-    });
-
-    document.getElementById("turma_id").innerHTML = html;
+    console.log("TURMAS:", turmas);
 
 }
 
