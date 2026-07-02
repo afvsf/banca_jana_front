@@ -22,19 +22,13 @@ async function carregarTurmas(){
 
     const token = localStorage.getItem("token");
 
-    console.log("TOKEN:", token);
-
     const req = await fetch(`${API}/turmas`, {
         headers: {
             Authorization: token
         }
     });
 
-    console.log("STATUS:", req.status);
-
     const turmas = await req.json();
-
-    console.log("TURMAS:", turmas);
 
     let html = '<option value="">Selecione a turma</option>';
 
