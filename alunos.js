@@ -164,7 +164,10 @@ async function salvarAluno(){
          dia_vencimento:
             document.getElementById(
                 'dia_vencimento'
-            ).value
+            ).value,
+
+        turma_id:
+            document.getElementById("turma_id").value,
 
     };
 
@@ -279,6 +282,8 @@ formatarDataInput(
         'dia_vencimento'
     ).value =
     aluno.dia_vencimento;
+    document.getElementById("turma_id").value =
+    aluno.turma_id;
 
     new bootstrap.Modal(
         document.getElementById(
