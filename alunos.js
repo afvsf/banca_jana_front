@@ -10,7 +10,6 @@ function formatarDataBR(data){
 
 }
 
-
 function formatarDataInput(data){
 
     if(!data) return '';
