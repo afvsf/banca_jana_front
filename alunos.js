@@ -439,5 +439,7 @@ function buscarAluno(){
 
 }
 
-carregarTurmas();
-carregarAlunos();
+document.addEventListener("DOMContentLoaded", () => {
+    carregarTurmas();
+    carregarAlunos(); // se quiser já carregar alunos também
+});
