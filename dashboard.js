@@ -93,6 +93,57 @@ async function carregarDashboard(){
 
     });
 
+    async function carregarAniversariantes(){
+
+    const req = await fetch(
+        `${API}/dashboard/aniversariantes`,
+        {
+            headers:{
+                Authorization: localStorage.getItem("token")
+            }
+        }
+    );
+
+    const lista = await req.json();
+
+    let html = "";
+
+    if(lista.length == 0){
+
+        html = `
+            <p class="text-muted">
+                Nenhum aniversariante este mês.
+            </p>
+        `;
+
+    }else{
+
+        lista.forEach(item=>{
+
+            html += `
+
+                <div class="border-bottom py-2">
+
+                    <strong>${item.nome}</strong>
+
+                    <br>
+
+                    <small>
+                        Dia ${item.dia}
+                    </small>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+    document.getElementById("aniversariantes").innerHTML = html;
+
+}
+
     document.getElementById(
         'totalRecebido'
     ).innerHTML =
@@ -120,3 +171,5 @@ async function carregarDashboard(){
 }
 
 carregarDashboard();
+
+carregarAniversariantes();
