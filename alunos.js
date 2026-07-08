@@ -176,6 +176,9 @@ async function salvarAluno(){
         nome:
             document.getElementById('nome').value,
 
+        data_nascimento:
+            document.getElementById("data_nascimento").value,
+
         data_matricula:
             document.getElementById(
                 'data_matricula'
@@ -291,6 +294,9 @@ async function editarAluno(id){
 
     document.getElementById('nome').value =
         aluno.nome;
+
+    document.getElementById("data_nascimento").value =
+    formatarDataInput(aluno.data_nascimento);
 
     document.getElementById(
     'data_matricula'
