@@ -209,6 +209,9 @@ async function salvarAluno(){
 
     };
 
+    console.log("Dados enviados:");
+    console.log(dados);
+
     if(id){
 
     await fetch(
